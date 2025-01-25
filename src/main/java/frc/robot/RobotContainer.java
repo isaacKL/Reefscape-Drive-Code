@@ -79,7 +79,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command getAutonomous() {
     // Create config for trajectory
     TrajectoryConfig config = new TrajectoryConfig(
         AutoConstants.kMaxSpeedMetersPerSecond,
@@ -118,5 +118,54 @@ public class RobotContainer {
 
     // Run path following command, then stop at the end.
     return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+  }
+
+  public Command t_encoderLimitCommand(){
+    
+  }
+
+  public Command t_encoderCount(){
+
+  }
+
+  public Command t_driveDirection(){
+    // Create config for trajectory
+    TrajectoryConfig config = new TrajectoryConfig(
+        TestConstants.kMaxSpeedMetersPerSecond,
+        TestConstants.kMaxAccelerationMetersPerSecondSquared)
+        // Add kinematics to ensure max speed is actually obeyed
+        .setKinematics(DriveConstants.kDriveKinematics);
+
+    Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
+        // Start at the origin facing the +X direction
+        new Pose2d(0, 0, new Rotation2d(0)),
+        // Check if these values are relative or absolute
+        List.of(new Translation2d(0, 1), new Translation2d(-1, 0), new Translation2d(0, -1),
+        new Translation2d(1, 0))
+        
+        // End 3 meters straight ahead of where we started, facing forward
+        new Pose2d(3, 0, new Rotation2d(0)),
+        config);
+  }
+
+  public Command t_EncoderDistanceTracking(){
+
+  }
+
+  public Command t_MechanismDirections(){
+
+  }
+
+  public Command t_DrivetrainStartingPosition(){
+  // Create config for trajectory
+    TrajectoryConfig config = new TrajectoryConfig(
+        AutoConstants.kMaxSpeedMetersPerSecond,
+        AutoConstants.kMaxAccelerationMetersPerSecondSquared)
+        // Add kinematics to ensure max speed is actually obeyed
+        .setKinematics(DriveConstants.kDriveKinematics);
+  }
+
+  public Command t_PivotAngles(){
+    
   }
 }
