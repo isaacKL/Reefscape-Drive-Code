@@ -99,32 +99,34 @@ public class Robot extends TimedRobot {
     //Example on line 63
  
     switch (TEST){
-      case ENCODER_LIMIT:
-          testCommand = m_robotContainer.t_encoderLimit()
-        break;
-      case ENCODER_COUNT:
-        testCommand = m_robotContainer.t_encoderCount()
-        break;
-      case DRIVE_DIRECTIONS:
-        testCommand = m_robotContainer.t_driveDirections()
-        break;
       case ENCODERDIST_TRACKING:
-        testCommand = m_robotContainer.t_EncoderDistanceTracking()
+        testCommand = m_robotContainer.t_EncoderDistanceTracking();
         break;
       case MECHANISM_DIRECTION:
-        testCommand = m_robotContainer.t_MechanismDirections()
+        testCommand = m_robotContainer.t_MechanismDirections();
         break;
       case  DRIVETRAIN_STARTINGPOSITION:
-     testCommand = m_robotContainer.t_DrivetrainStartingPosition()
+        testCommand = m_robotContainer.t_DrivetrainStartingPosition();
         break;
       case PIVOT_ANGLES:
-      testCommand = m_robotContainer.t_PivotAngles()
+        testCommand = m_robotContainer.t_PivotAngles();
+        break;
+      default:
+        testCommand = null;
+        break;
     }
   }
 
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
- 
+    switch(TEST){
+      case ENCODER_COUNT:
+        //Call encoder function here
+        break;
+      default:
+        //put placeholder code
+        break;
+    }
   }
 }

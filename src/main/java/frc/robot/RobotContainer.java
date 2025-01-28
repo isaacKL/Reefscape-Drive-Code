@@ -71,7 +71,7 @@ public class RobotContainer {
     new JoystickButton(m_driverController, Button.kR1.value)
         .whileTrue(new RunCommand(
             () -> m_robotDrive.setX(),
-            m_robotDrive));
+            9));
   }
 
   /**
@@ -120,7 +120,7 @@ public class RobotContainer {
     return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
   }
 
-  public Command t_encoderLimitCommand(){
+  public Command t_encoderLimit(){
     
   }
 
@@ -128,6 +128,7 @@ public class RobotContainer {
 
   }
 
+  //Commands for testing drivetrain
   public Command t_driveDirection(){
     // Create config for trajectory
     TrajectoryConfig config = new TrajectoryConfig(
@@ -143,9 +144,31 @@ public class RobotContainer {
         List.of(new Translation2d(0, 1), new Translation2d(-1, 0), new Translation2d(0, -1),
         new Translation2d(1, 0))
         
-        // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(3, 0, new Rotation2d(0)),
+        // End where we started
+        new Pose2d(0, 0, new Rotation2d(0)),
         config);
+     var thetaController = new ProfiledPIDController(
+        AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
+    thetaController.enableContinuousInput(-Math.PI, Math.PI);
+
+    SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
+        exampleTrajectory,
+        m_robotDrive::getPose, // Functional interface to feed supplier
+        DriveConstants.kDriveKinematics,
+
+        // Position controllers
+        new PIDController(AutoConstants.kPXController, 0, 0),
+        new PIDController(AutoConstants.kPYController, 0, 0),
+        thetaController,
+        m_robotDrive::setModuleStates,
+        m_robotDrive);
+
+    // Reset odometry to the starting pose of the trajectory.
+    m_robotDrive.resetOdometry(exampleTrajectory.getInitialPose());
+
+    // Run path following command, then stop at the end.
+    return swerveControllerCommand.andThen(() -> m_robotDrive.drive(0, 0, 0, false));
+  
   }
 
   public Command t_EncoderDistanceTracking(){
@@ -168,4 +191,6 @@ public class RobotContainer {
   public Command t_PivotAngles(){
     
   }
+
+  
 }
