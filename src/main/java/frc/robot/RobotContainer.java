@@ -191,6 +191,20 @@ public class RobotContainer {
   public Command t_PivotAngles(){
     
   }
+//Returns run cammna, returns the command that tells it to run at a certain speed
+  public Command Forward(Spark motor, int speed){
+    return RunCommand(
+            () -> motor.set(speed)
+           ));
 
-  
+    
+  }
+  public Command Backward(Spark motor, int speed){
+    return RunCommand(
+            () -> motor.set(-speed)
+           ));
+
+    
+  }
 }
+//if commands don't work we can use periodic
