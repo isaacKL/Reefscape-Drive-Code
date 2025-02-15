@@ -80,9 +80,14 @@ public class RobotContainer {
     JoystickButton aButton = new JoystickButton (m_controllerTwo, Button.kA.value); // For the "A" button
     aButton.whileTrue(shooter.outwardCommand().andThen(shooter.shooterStop()));
     
+    JoystickButton bButton = new JoystickButton (m_controllerTwo, Button.kA.value); // For the "B" button
+    aButton.whileTrue(shooter.inwardCommand().andThen(shooter.shooterStop()));
 
-
+    JoystickButton yButton = new JoystickButton (m_controllerTwo, Button.kA.value); // For the "Y" button
+    aButton.whileTrue(pivot.pivotUp().andThen(pivot.pivotStop()));
     
+    JoystickButton xButton = new JoystickButton (m_controllerTwo, Button.kA.value); // For the "X" button
+    aButton.whileTrue(pivot.pivotDown().andThen(pivot.pivotStop()));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
