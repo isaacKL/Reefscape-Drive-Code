@@ -29,9 +29,9 @@ public final class Constants {
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
 
     // Chassis configuration
-    public static final double kTrackWidth = Units.inchesToMeters(26.5);
+    public static final double kTrackWidth = Units.inchesToMeters(29);
     // Distance between centers of right and left wheels on robot
-    public static final double kWheelBase = Units.inchesToMeters(26.5);
+    public static final double kWheelBase = Units.inchesToMeters(29);
     // Distance between front and back wheels on robot
     public static final SwerveDriveKinematics kDriveKinematics = new SwerveDriveKinematics(
         new Translation2d(kWheelBase / 2, kTrackWidth / 2),
@@ -101,7 +101,7 @@ public final class Constants {
   }
 
   public static final class TestConstants{
-    public static final enum TEST_PLAN {
+    /*public static final enum TEST_PLAN {
                         ENCODER_LIMITS,
                         ENCODER_COUNT,
                         DRIVE_DIRECTIONS,
@@ -109,7 +109,7 @@ public final class Constants {
                         MECHANISM_DIRECTION,
                         DRIVETRAIN_STARTINGPOSITION,
                         PIVOT_ANGLES
-                        };
+                        };*/
     public static final double kMaxSpeedMetersPerSecond = 3;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
   }

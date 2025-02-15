@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Constants.TestConstants.TEST_PLAN;
+//import frc.robot.Constants.TestConstants.TEST_PLAN;
 //Import encoder, find out which one we use
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -17,7 +17,7 @@ import frc.robot.Constants.TestConstants.TEST_PLAN;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-  private Command testCommand;
+  //private Command testCommand;
   private RobotContainer m_robotContainer;
 
   /**
@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autonomousCommand = m_robotContainer.getAutonomous();
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -98,7 +98,7 @@ public class Robot extends TimedRobot {
     //Get TEST chosen on smartdashboard
     //Example on line 63
  
-    switch (TEST){
+   /*  switch (TEST){
       case ENCODERDIST_TRACKING:
         testCommand = m_robotContainer.t_EncoderDistanceTracking();
         break;
@@ -114,13 +114,13 @@ public class Robot extends TimedRobot {
       default:
         testCommand = null;
         break;
-    }
+    } */
   }
 
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {
-    switch(TEST){
+    /*switch(TEST){
       case ENCODER_COUNT:
         //Call encoder function here
        // int encoder = encoder.get(); 
@@ -128,6 +128,6 @@ public class Robot extends TimedRobot {
       default:
         //put placeholder code
         break;
-    }
+    }*/
   }
 }

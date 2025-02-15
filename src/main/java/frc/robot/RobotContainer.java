@@ -14,16 +14,20 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.PS4Controller.Button;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.Constants.TestConstants;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
+
+import com.revrobotics.spark.SparkMax;
 
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -34,10 +38,10 @@ import java.util.List;
 public class RobotContainer {
   // The robot's subsystems
   private final DriveSubsystem m_robotDrive = new DriveSubsystem();
-
+  private final ShooterSubsystem shooter = new ShooterSubsystem(0, 0);
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
-
+  XboxController m_controllerTwo = new XboxController(1);
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -68,12 +72,18 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(m_driverController, Button.kR1.value)
-        .whileTrue(new RunCommand(
-            () -> m_robotDrive.setX(),
-            9));
-  }
+    // new JoystickButton(m_driverController, Button.kR1.value)
+    //     .whileTrue(new RunCommand(
+    //         () -> m_robotDrive.setX(),
+    //         9));
+    
+    JoystickButton aButton = new JoystickButton (m_controllerTwo, Button.kA.value); // For the "A" button
+    aButton.whileTrue(shooter.outwardCommand().andThen(shooter.shooterStop()));
+    
 
+
+    
+  }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
@@ -121,11 +131,11 @@ public class RobotContainer {
   }
 
   public Command t_encoderLimit(){
-    
+    return null;
   }
 
   public Command t_encoderCount(){
-
+    return null; 
   }
 
   //Commands for testing drivetrain
@@ -142,7 +152,7 @@ public class RobotContainer {
         new Pose2d(0, 0, new Rotation2d(0)),
         // Check if these values are relative or absolute
         List.of(new Translation2d(0, 1), new Translation2d(-1, 0), new Translation2d(0, -1),
-        new Translation2d(1, 0))
+        new Translation2d(1, 0)),
         
         // End where we started
         new Pose2d(0, 0, new Rotation2d(0)),
@@ -172,11 +182,11 @@ public class RobotContainer {
   }
 
   public Command t_EncoderDistanceTracking(){
-
+    return null;
   }
 
   public Command t_MechanismDirections(){
-
+    return null;
   }
 
   public Command t_DrivetrainStartingPosition(){
@@ -186,25 +196,23 @@ public class RobotContainer {
         AutoConstants.kMaxAccelerationMetersPerSecondSquared)
         // Add kinematics to ensure max speed is actually obeyed
         .setKinematics(DriveConstants.kDriveKinematics);
+      return null;
   }
 
-  public Command t_PivotAngles(){
+  //public Command t_PivotAngles(){}
     
-  }
-//Returns run cammna, returns the command that tells it to run at a certain speed
-  public Command Forward(Spark motor, int speed){
-    return RunCommand(
-            () -> motor.set(speed)
-           ));
+  //Returns runcommand, returns the command that tells it to run at a certain speed
+  public void Forward(SparkMax motor, int speed){
+    // RunCommand rc = new RunCommand(
+    //         () -> motor.set(speed),0
+    //        );
 
     
   }
-  public Command Backward(Spark motor, int speed){
-    return RunCommand(
-            () -> motor.set(-speed)
-           ));
-
-    
+  public void Backward(SparkMax motor, int speed){
+    // return RunCommand(
+    //         () -> motor.set(-speed),9
+    //        );
   }
 }
-//if commands don't work we can use periodic
+  //if commands don't work we can use periodic
