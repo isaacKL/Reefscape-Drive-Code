@@ -2,16 +2,16 @@ package frc.robot.subsystems;
 
 
 
-import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kForward;
-import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kReverse;
+//import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kForward;
+//import static edu.wpi.first.wpilibj.DoubleSolenoid.Value.kReverse;
 
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.util.sendable.SendableBuilder;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
+//import edu.wpi.first.wpilibj.DoubleSolenoid;
+//import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -22,6 +22,11 @@ public class ShooterSubsystem extends SubsystemBase {
     private final SparkMax pivotMotor;
     private final AbsoluteEncoder pivotEncoder; 
     private final AbsoluteEncoder shooterEncoder; 
+
+    double kShooterForward= 0.1;
+    double kShooterReverse= 0.1;
+    double kPivotForward= 0.1;
+    double kPivotReverse = 0.1;
 
     public ShooterSubsystem(int pivotCANId, int shooterCANId){
         //Motors
@@ -35,14 +40,16 @@ public class ShooterSubsystem extends SubsystemBase {
 
     /**  */
     public Command outwardCommand() {
-        // implicitly require `this`
-        return this.runOnce(() -> shooterMotor.set(kShooterForward));
+       
+                // implicitly require `this`
+                return this.runOnce(() -> shooterMotor.set(kShooterForward));
     }
 
     /** Releases the hatch. */
     public Command inwardCommand() {
-        // implicitly require `this`
-        return this.runOnce(() -> shooterMotor.set(kShooterReverse));
+       
+                // implicitly require `this`
+                return this.runOnce(() -> shooterMotor.set(kShooterReverse));
     }
     
     public Command shooterStop(){   
@@ -54,17 +61,19 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
     public Command pivotUp(){   
-        return this.runOnce(() -> pivotMotor.set(kPivotForward));
+       
+                return this.runOnce(() -> pivotMotor.set(kPivotForward));
     }
 
     public Command pivotDown(){
-        return this.runOnce(() -> pivotMotor.set(kPivotReverse));
+        
+                return this.runOnce(() -> pivotMotor.set(kPivotReverse));
     }
 
     @Override
     public void initSendable(SendableBuilder builder) {
-        super.initSendable(builder);
+        //super.initSendable(builder);
         // Publish the solenoid state to telemetry.
-        builder.addBooleanProperty("extended", () -> m_hatchSolenoid.get() == kForward, null);
+       // builder.addBooleanProperty("extended", () -> m_hatchSolenoid.get() == kForward, null);
     }
 }
