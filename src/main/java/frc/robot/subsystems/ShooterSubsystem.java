@@ -40,40 +40,39 @@ public class ShooterSubsystem extends SubsystemBase {
 
     /**  */
     public Command outwardCommand() {
-       
+        return runOnce(
+            () -> {
+                shooterMotor.set(kShooterForward);
+            });
                 // implicitly require `this`
-                return this.runOnce(() -> shooterMotor.set(kShooterForward));
+        
     }
 
     /** Releases the hatch. */
     public Command inwardCommand() {
        
                 // implicitly require `this`
-                return this.runOnce(() -> shooterMotor.set(kShooterReverse));
+                return this.runOnce(() ->{ shooterMotor.set(kShooterReverse);});
     }
     
     public Command shooterStop(){   
-        return this.runOnce(() -> shooterMotor.set(0));
+        return this.runOnce(() -> {shooterMotor.set(0);});
     }
 
     public Command pivotStop(){   
-        return this.runOnce(() -> pivotMotor.set(0));
+        return this.runOnce(() -> {pivotMotor.set(0);});
     }
 
     public Command pivotUp(){   
        
-                return this.runOnce(() -> pivotMotor.set(kPivotForward));
+                return this.runOnce(() -> {pivotMotor.set(kPivotForward);});
     }
 
     public Command pivotDown(){
         
-                return this.runOnce(() -> pivotMotor.set(kPivotReverse));
+                return this.runOnce(() -> {pivotMotor.set(kPivotReverse);});
     }
 
-    @Override
-    public void initSendable(SendableBuilder builder) {
-        //super.initSendable(builder);
-        // Publish the solenoid state to telemetry.
-       // builder.addBooleanProperty("extended", () -> m_hatchSolenoid.get() == kForward, null);
-    }
+    
+   
 }
