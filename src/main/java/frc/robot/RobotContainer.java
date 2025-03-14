@@ -87,8 +87,8 @@ public class RobotContainer {
     // JoystickButton yButton = new JoystickButton (m_controllerTwo, Button.kA.value); // For the "Y" button
     // aButton.whileTrue(shooter.pivotUp().andThen(shooter.pivotStop()));
     
-    // JoystickButton xButton = new JoystickButton (m_controllerTwo, Button.kA.value); // For the "X" button
-    // aButton.whileTrue(shooter.pivotDown().andThen(shooter.pivotStop()));
+    //  JoystickButton xButton = new JoystickButton (m_controllerTwo, Button.kA.value); // For the "X" button
+    //  aButton.whileTrue(shooter.pivotDown().andThen(shooter.pivotStop()));
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -111,9 +111,10 @@ public class RobotContainer {
         // Go forward 
         List.of(),
        //List.of (new Translation2d(0, .33),new Translation2d(0, .66)),
-        // End 3 meters straight ahead of where we started, facing forward
+        // This new code should make the robot go forward 1 meter.
         new Pose2d(1, 0, new Rotation2d(0)),
         config);
+
 
     var thetaController = new ProfiledPIDController(
         AutoConstants.kPThetaController, 0, 0, AutoConstants.kThetaControllerConstraints);
