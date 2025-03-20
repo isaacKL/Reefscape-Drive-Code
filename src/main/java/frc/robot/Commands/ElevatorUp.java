@@ -1,22 +1,20 @@
 package frc.robot.Commands;
-
 import java.lang.annotation.Target;
-
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.ElevatorSubsystem;
 
 public class ElevatorUp extends Command {
     private int setPoint;
 
 
-    private final ClimberSubsystem m_ClimberSubsystem;
+    private final ElevatorSubsystem m_ElevatorSubsystem;
 
-        public ElevatorUp(ClimberSubsystem climber, int target){
+        public ElevatorUp(ElevatorSubsystem elevator, int target){
             
              setPoint = target;
-             m_ClimberSubsystem = climber;
+             m_ElevatorSubsystem = elevator;
 
-             addRequirements(m_ClimberSubsystem);
+             addRequirements(m_ElevatorSubsystem);
 
         }
     
@@ -28,13 +26,14 @@ public class ElevatorUp extends Command {
     @Override
     public void execute(){
        
-        m_ClimberSubsystem.forward();
+        double speed = m_ElevatorSubsystem.elevator_cntlr.calculate(m_ElevatorSubsystem.getElevatorEncoder(), setPoint);
+        m_ElevatorSubsystem.elevate(speed);
     }
 
     @Override
     public void end(boolean interrupted){
 
-        m_ClimberSubsystem.stop();
+        m_ElevatorSubsystem.stop();
     }
 
     @Override

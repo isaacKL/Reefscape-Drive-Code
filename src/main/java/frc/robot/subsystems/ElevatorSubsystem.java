@@ -17,13 +17,21 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
+
 
 /** A hatch mechanism actuated by a single {@link edu.wpi.first.wpilibj.DoubleSolenoid}. */
-public class ClimberSubsystem extends SubsystemBase {
+public class ElevatorSubsystem extends SubsystemBase {
   
-  private final SparkMax climberMotor;
-  private final RelativeEncoder climberEncoder;
+  private final SparkMax ElevatorMotor;
+  private final RelativeEncoder ElevatorEncoder;
+  
+  
+  private final double kP_elevator = 1,
+  kI_elevator = 0.1,
+  kD_elevator = 0;
+  public ProfiledPIDController elevator_cntlr = new ProfiledPIDController(
+    kP_elevator, kI_elevator, kD_elevator,
+    new TrapezoidProfile.Constraints(5, 10));
 
   //private final ProfiledPIDController m_controller =
       //new ProfiledPIDController(
@@ -39,29 +47,38 @@ public class ClimberSubsystem extends SubsystemBase {
           //DriveConstants.kvVoltSecondsPerDegree,
           //DriveConstants.kaVoltSecondsSquaredPerDegree);
 
-public ClimberSubsystem(int leftCanId){
+public ElevatorSubsystem(int leftCanId){
 
-    climberMotor = new SparkMax(leftCanId, MotorType.kBrushless);
-    climberEncoder = climberMotor.getEncoder();
+    ElevatorMotor = new SparkMax(leftCanId, MotorType.kBrushless);
+    ElevatorEncoder = ElevatorMotor.getEncoder();
 
 
 }
 
 public void forward(){
-climberMotor.set(.1);
+ElevatorMotor.set(.1);
 
 }
 
 public void Backward(){
-  climberMotor.set(-.1);
+  ElevatorMotor.set(-.1);
 }
 
+
 public void stop(){
-  climberMotor.set(0);
+  ElevatorMotor.set(0);
+}
+
+public void elevate(double speed){
+  ElevatorMotor.set(speed);
+}
+
+public double getElevatorEncoder(){
+  return ElevatorEncoder.getPosition();
 }
 
 public double getDistance(){
-  return climberEncoder.getVelocity();
+  return ElevatorEncoder.getVelocity();
 
 }
   
