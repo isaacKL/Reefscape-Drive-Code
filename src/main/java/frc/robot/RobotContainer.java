@@ -114,12 +114,13 @@ public class RobotContainer {
     JoystickButton xButton = new JoystickButton (m_controllerTwo, Button.kX.value); // For the "X" button
     xButton.whileTrue(new PivotShooterUp(shooter,3));
 
-    JoystickButton JoystickButton = new JoystickButton (m_controllerTwo, Button.K.value); // For the "X" button
+    JoystickButton LbBumperButton = new JoystickButton (m_controllerTwo, Button.kLeftBumper.value); // For the "X" button
      xButton.whileTrue(new ElevatorDown(elevator,3));
      
-    JoystickButton triggerJoystickButton = new JoystickButton (m_controllerTwo, Button.K.value); // For the "X" button
+    JoystickButton RbBumperButton = new JoystickButton (m_controllerTwo, Button.kRightBumper.value); // For the "X" button
      xButton.whileTrue(new ElevatorUp(elevator,3));
     
+     
   }
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
