@@ -27,7 +27,7 @@ public class ShooterInward extends Command {
     @Override
     public void execute(){
         double speed = m_ShooterSubsystem.shooter_cntlr.calculate(m_ShooterSubsystem.getShooterPosition(), setPoint);
-        m_ShooterSubsystem.shoot(speed);
+        m_ShooterSubsystem.shoot(-speed);
     }
 
     @Override

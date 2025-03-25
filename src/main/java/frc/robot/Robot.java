@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
 
-    /*m_visionThread =
+    m_visionThread =
         new Thread(
             () -> {
               // Get the UsbCamera from CameraServer
@@ -78,7 +78,7 @@ public class Robot extends TimedRobot {
               }
             });
     m_visionThread.setDaemon(true);
-    m_visionThread.start(); */
+    m_visionThread.start(); 
   } 
 
 

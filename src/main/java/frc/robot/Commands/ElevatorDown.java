@@ -32,13 +32,14 @@ public class ElevatorDown extends Command {
     @Override
     public void execute(){
        
-        m_ElevatorSubsystem.Backward();
+        double speed = m_ElevatorSubsystem.elevator_cntlr.calculate(m_ElevatorSubsystem.getDistance(), setPoint);
+        m_ElevatorSubsystem.elevate(speed);
     
     }
 
     @Override
     public boolean isFinished(){
-        return false;
+        return m_ElevatorSubsystem.elevator_cntlr.atGoal();
     }
 
 }

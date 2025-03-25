@@ -27,7 +27,8 @@ public class PivotShooterDown extends Command{
     @Override
     public void execute(){
        
-        m_PivotShooterSubsystem.pivotDown();
+        double speed = m_PivotShooterSubsystem.pivot_cntrlr.calculate(m_PivotShooterSubsystem.getShooterPosition(), setPoint);
+        m_PivotShooterSubsystem.pivot(-0.2);
     }
 
     @Override

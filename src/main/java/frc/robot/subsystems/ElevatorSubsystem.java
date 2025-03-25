@@ -51,8 +51,8 @@ public ElevatorSubsystem(int leftCanId){
 
     ElevatorMotor = new SparkMax(leftCanId, MotorType.kBrushless);
     ElevatorEncoder = ElevatorMotor.getEncoder();
-
-
+    ElevatorEncoder.setPosition(0);
+    // ElevatorEncoder.setPositionConversionFactor()
 }
 
 public void forward(){
