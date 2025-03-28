@@ -29,7 +29,6 @@ import java.util.List;
      private final AprilTagDetector m_detector = new AprilTagDetector();
  
      boolean useNativePoseEst;
- 
      public AprilTagFinder() {
          
  
