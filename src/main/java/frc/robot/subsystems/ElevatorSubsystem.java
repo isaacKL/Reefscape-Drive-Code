@@ -75,17 +75,14 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
 
   public double getElevatorEncoder() {
-
     return ElevatorEncoder.getVelocity();
   }
 
   public double getDistance() {
     return ElevatorEncoder.getPosition();
-
   }
   public void setPID(double kP,double kI, double kD){
     elevator_cntlr.setPID(kP, kI, kD);
-
   }
 
 }

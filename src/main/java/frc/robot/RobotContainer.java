@@ -16,9 +16,7 @@ import edu.wpi.first.math.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Commands.ElevatorDown;
 import frc.robot.Commands.ElevatorUp;
 import frc.robot.Commands.PivotShooterDown;
@@ -106,6 +104,9 @@ public class RobotContainer {
     //         () -> m_robotDrive.setX()
     // ));
     
+
+    new JoystickButton(m_driverController, Button.kA.value)
+          .whileTrue(FindAprilTag());
     JoystickButton aButton = new JoystickButton (m_controllerTwo, Button.kA.value); // For the "A" button
     aButton.whileTrue(new ShooterOutward(shooter,3));
     

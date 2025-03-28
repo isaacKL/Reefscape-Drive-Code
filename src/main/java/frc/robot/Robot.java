@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
               // Get a CvSink. This will capture Mats from the camera
               CvSink cvSink = CameraServer.getVideo();
               // Setup a CvSource. This will send images back to the Dashboard
-              CvSource outputStream = CameraServer.putVideo("Rectangle", 640, 480);
+              CvSource outputStream = CameraServer.putVideo("CameraStream", 640, 480);
 
               // Mats are very memory expensive. Lets reuse this Mat.
               Mat mat = new Mat();
@@ -78,7 +78,8 @@ public class Robot extends TimedRobot {
                   // skip the rest of the current iteration
                   continue;
                 }
-                //aprils.process(mat);
+                double x = aprils.process(mat,0);
+                mainTab.add("CameraCenters", x);
                 // Put a rectangle on the image
                 Imgproc.rectangle(
                     mat, new Point(100, 100), new Point(400, 400), new Scalar(255, 255, 255), 5);
@@ -133,13 +134,7 @@ public class Robot extends TimedRobot {
         m_autonomousCommand = m_robotContainer.autoMiddle();
         break;
     }
-      // String autoSelected = SmartDashboard.getString("Auto Selector",
-      // "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-      // = new MyAutoCommand(); break; case "Default Auto": default:
-      // autonomousCommand = new ExampleCommand(); break; }
-     
 
-    // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
